@@ -15,7 +15,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useSearchParams, useRouter } from "next/navigation";
 import { CldUploadWidget } from "next-cloudinary";
-import { Product, SubCategory, Category } from "@/types";
+import { Product, SubCategory, Category, Brand } from "@/types";
 import Pagination from "@/components/Pagination";
 
 export default function ProductsTable({
@@ -23,11 +23,13 @@ export default function ProductsTable({
   totalPages,
   subCategories,
   categories,
+  brands,
 }: {
   initialProducts: Product[];
   totalPages: number;
   subCategories: SubCategory[];
   categories: Category[];
+  brands: Brand[];
 }) {
   const [saving, setSaving] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -369,11 +371,17 @@ export default function ProductsTable({
                       <label className="text-[11px] font-black uppercase tracking-widest text-primary ml-2">
                         Brand
                       </label>
-                      <input
+                      <select
                         {...register("brand", { required: true })}
-                        className="w-full bg-secondary border-none rounded-2xl p-4 outline-none font-bold text-primary"
-                        placeholder="e.g. Dior"
-                      />
+                        className="w-full bg-secondary border-none rounded-2xl p-4 outline-none font-bold text-primary appearance-none"
+                      >
+                        <option value="">Select brand...</option>
+                        {brands.map((brand) => (
+                          <option key={brand._id} value={brand.name}>
+                            {brand.name}
+                          </option>
+                        ))}
+                      </select>
                     </div>
 
                     <div className="grid grid-cols-3 gap-4">

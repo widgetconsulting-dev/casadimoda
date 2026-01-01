@@ -1,26 +1,32 @@
-import db, { MongoDocument } from "@/utils/db";
-import ProductModel from "@/models/Product";
 import { notFound } from "next/navigation";
 import ProductDetailsContent from "@/components/ProductDetailsContent";
-import { Product } from "@/types";
+import db from "@/utils/db";
+import Product from "@/models/Product";
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
+interface ProductPageProps {
+  params: Promise<{
+    slug: string;
+  }>;
 }
 
-export default async function ProductScreen({ params }: PageProps) {
+export default async function ProductDetailsPage({ params }: ProductPageProps) {
   const { slug } = await params;
 
   await db.connect();
-  const doc = await ProductModel.findOne({ slug }).lean();
+  const product = await Product.findOne({ slug }).lean();
+  await db.disconnect();
 
-  if (!doc) {
-    return notFound();
+  if (!product) {
+    notFound();
   }
 
-  const product = db.convertDocToObj(
-    doc as MongoDocument
-  ) as unknown as Product;
+  // Convert mongoose document to plain object and fix _id serialization if needed
+  const serializedProduct = {
+    ...product,
+    _id: product._id.toString(),
+    createdAt: product.createdAt?.toString(),
+    updatedAt: product.updatedAt?.toString(),
+  };
 
-  return <ProductDetailsContent product={product} />;
+  return <ProductDetailsContent product={serializedProduct as any} />;
 }

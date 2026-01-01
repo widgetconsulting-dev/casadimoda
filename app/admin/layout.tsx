@@ -101,7 +101,7 @@ export default function AdminLayout({
           </button>
         </div>
 
-        <nav className="flex-grow p-6 space-y-2 mt-4 overflow-y-auto no-scrollbar">
+        <nav className="flex-grow p-6 space-y-2 mt-4 overflow-y-auto">
           <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 mb-4 ml-4">
             Management
           </p>

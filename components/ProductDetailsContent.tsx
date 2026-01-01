@@ -17,6 +17,7 @@ export default function ProductDetailsContent({
 }: ProductDetailsContentProps) {
   const { state, dispatch } = useStore();
   const [qty, setQty] = useState(1);
+  const [isAdded, setIsAdded] = useState(false);
 
   const addToCartHandler = () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
@@ -38,6 +39,9 @@ export default function ProductDetailsContent({
         quantity,
       },
     });
+
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 2000);
   };
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -232,9 +236,12 @@ export default function ProductDetailsContent({
             <button
               onClick={addToCartHandler}
               disabled={product.countInStock === 0}
-              className="bg-accent hover:scale-[1.02] active:scale-95 text-primary font-black py-4 px-12 rounded-2xl transition-all shadow-xl shadow-accent/20 text-sm uppercase tracking-[0.2em] flex-1 cursor-pointer disabled:bg-gray-200 disabled:shadow-none disabled:cursor-not-allowed"
+              className={`font-black py-4 px-12 rounded-2xl transition-all shadow-xl text-sm uppercase tracking-[0.2em] flex-1 cursor-pointer flex items-center justify-center gap-2 ${isAdded
+                  ? "bg-green-500 text-white shadow-green-500/20 scale-105"
+                  : "bg-accent hover:scale-[1.02] active:scale-95 text-primary shadow-accent/20"
+                } disabled:bg-gray-200 disabled:shadow-none disabled:cursor-not-allowed`}
             >
-              Reserve Item
+              {isAdded ? "Added to Cart" : "Reserve Item"}
             </button>
           </div>
 

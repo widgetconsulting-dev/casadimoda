@@ -19,7 +19,7 @@ export default function Header({
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <header className="flex flex-col text-white font-sans ring-1 ring-white/5 shadow-lg relative">
+    <header className="flex flex-col text-white font-sans ring-1 ring-white/5 shadow-lg relative sticky top-0 z-50 ">
       <Sidebar
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}

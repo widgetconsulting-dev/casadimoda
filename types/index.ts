@@ -85,3 +85,11 @@ export type GiftCardFormData = {
   balance: number;
   isActive: boolean;
 };
+
+export interface User {
+  _id: string;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+  createdAt: string;
+}
