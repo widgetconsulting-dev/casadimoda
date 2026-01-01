@@ -6,7 +6,6 @@ import GiftCardModel from "@/models/GiftCard";
 export default async function AdminGiftCardsPage() {
   await db.connect();
   const docs = await GiftCardModel.find({}).lean();
-  await db.disconnect();
 
   const giftCards = docs.map(doc => db.convertDocToObj(doc as MongoDocument) as unknown as GiftCard);
 

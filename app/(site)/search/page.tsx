@@ -103,8 +103,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         ProductModel.find().distinct("brand")
     ]);
 
-    await db.disconnect();
-
     const products = productDocs.map(doc => db.convertDocToObj(doc as MongoDocument) as unknown as Product);
     const pages = Math.ceil(countProducts / pageSize);
     const categories: string[] = categoriesList;

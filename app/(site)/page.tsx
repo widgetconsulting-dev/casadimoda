@@ -23,7 +23,6 @@ export default async function Home({
         .skip(skip)
         .limit(pageSize)
         .lean();
-    await db.disconnect();
 
     const products = docs.map(doc => db.convertDocToObj(doc as MongoDocument) as unknown as Product);
     const totalPages = Math.ceil(totalProducts / pageSize);

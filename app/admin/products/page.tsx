@@ -26,8 +26,6 @@ export default async function AdminProductsPage({
     BrandModel.find({}).lean()
   ]);
 
-  await db.disconnect();
-
   const products = productsDocs.map(doc => db.convertDocToObj(doc as MongoDocument) as unknown as Product);
   const subCategories = subCategoriesDocs.map(doc => db.convertDocToObj(doc as MongoDocument) as unknown as SubCategory);
   const categories = categoriesDocs.map(doc => db.convertDocToObj(doc as MongoDocument) as unknown as Category);

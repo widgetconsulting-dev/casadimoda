@@ -6,7 +6,6 @@ import CouponModel from "@/models/Coupon";
 export default async function AdminCouponsPage() {
   await db.connect();
   const docs = await CouponModel.find({}).lean();
-  await db.disconnect();
 
   const coupons = docs.map(doc => db.convertDocToObj(doc as MongoDocument) as unknown as Coupon);
 

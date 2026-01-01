@@ -12,8 +12,6 @@ export default async function AdminSubcategoriesPage() {
         CategoryModel.find({}).lean()
     ]);
 
-    await db.disconnect();
-
     const subCategories = subCategoriesDocs.map(doc => db.convertDocToObj(doc as MongoDocument) as unknown as SubCategory);
     const categories = categoriesDocs.map(doc => db.convertDocToObj(doc as MongoDocument) as unknown as Category);
 

@@ -6,7 +6,6 @@ import UserModel from "@/models/User";
 export default async function AdminUsersPage() {
     await db.connect();
     const docs = await UserModel.find({}).sort({ createdAt: -1 }).lean();
-    await db.disconnect();
 
     const users = docs.map(doc => db.convertDocToObj(doc as MongoDocument) as unknown as User);
 
