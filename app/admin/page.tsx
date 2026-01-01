@@ -10,6 +10,7 @@ import {
   AreaChart,
   Area,
 } from "recharts";
+import Link from "next/link";
 import {
   TrendingUp,
   Package,
@@ -130,11 +131,10 @@ export default function AdminDashboard() {
                 <stat.icon size={24} />
               </div>
               <div
-                className={`flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full ${
-                  stat.isUp
-                    ? "bg-green-50 text-green-600"
-                    : "bg-red-50 text-red-600"
-                }`}
+                className={`flex items-center gap-1 text-[10px] font-bold px-2 py-1 rounded-full ${stat.isUp
+                  ? "bg-green-50 text-green-600"
+                  : "bg-red-50 text-red-600"
+                  }`}
               >
                 {stat.isUp ? (
                   <ArrowUpRight size={12} />
@@ -159,7 +159,7 @@ export default function AdminDashboard() {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Sales Chart */}
-        <div className="lg:col-span-2 bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm">
+        <div className="col-span-3 xl:col-span-2 bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm">
           <div className="flex justify-between items-center mb-10">
             <div>
               <h3 className="text-xl font-black text-primary tracking-tight">
@@ -222,7 +222,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Categories Distribution */}
-        <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col justify-between">
+        <div className="col-span-3 xl:col-span-1 bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col justify-between">
           <div>
             <h3 className="text-xl font-black text-primary tracking-tight">
               Quick Actions
@@ -233,15 +233,24 @@ export default function AdminDashboard() {
           </div>
 
           <div className="space-y-4 my-8">
-            <button className="w-full bg-primary hover:bg-black text-white text-xs font-black uppercase tracking-[0.2em] py-5 rounded-2xl transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3 cursor-pointer">
+            <Link
+              href="/admin/products?action=create"
+              className="w-full bg-primary hover:bg-black text-white text-xs font-black uppercase tracking-[0.2em] py-5 rounded-2xl transition-all shadow-xl active:scale-95 flex items-center justify-center gap-3 cursor-pointer"
+            >
               Add New Product <ArrowUpRight size={16} />
-            </button>
-            <button className="w-full bg-accent hover:opacity-90 text-primary text-xs font-black uppercase tracking-[0.2em] py-5 rounded-2xl transition-all shadow-lg active:scale-95 cursor-pointer">
+            </Link>
+            <Link
+              href="/admin/giftcards"
+              className="w-full bg-accent hover:opacity-90 text-primary text-xs font-black uppercase tracking-[0.2em] py-5 rounded-2xl transition-all shadow-lg active:scale-95 flex items-center justify-center cursor-pointer"
+            >
               Generate Gift Card
-            </button>
-            <button className="w-full border-2 border-primary/5 hover:border-accent/30 text-primary text-xs font-black uppercase tracking-[0.2em] py-4 rounded-2xl transition-all cursor-pointer">
+            </Link>
+            <Link
+              href="/admin/coupons"
+              className="w-full border-2 border-primary/5 hover:border-accent/30 text-primary text-xs font-black uppercase tracking-[0.2em] py-4 rounded-2xl transition-all flex items-center justify-center cursor-pointer"
+            >
               Launch Discount Campaign
-            </button>
+            </Link>
           </div>
 
           <div className="p-6 bg-secondary/50 rounded-3xl border border-gray-100">
